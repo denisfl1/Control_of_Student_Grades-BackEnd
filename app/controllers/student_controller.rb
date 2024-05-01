@@ -23,8 +23,24 @@ class StudentController < ApplicationController
     first = parts.first
     last = parts.last
     random = rand(* 1000000000)
+    subjects = {
+      português:nil,
+      literatura:nil,
+      inglês:nil,
+      matemática:nil,
+      física:nil,
+      química:nil,
+      biologia:nil,
+      geografia:nil,
+      história:nil,
+      sociologia:nil,
+      filosofia:nil,
+      artes:nil,
+      educação_física:nil
 
-    Student.create(name:first,surname:last,ra:random)
+    }
+
+    Student.create(name:first,surname:last,ra:random,notes:subjects)
 
     }
 
@@ -40,5 +56,23 @@ class StudentController < ApplicationController
     render json: students, status:200
 
   end
+
+
+  def addNote
+
+    student = Student.find_by(ra:params[:ra])
+    datas = params[:data]
+
+
+      if student
+
+        student.update(notes: student.notes.merge({ datas[0] => datas[1] }))
+
+      end
+
+      render json:"Atualizado com sucesso",status:200
+
+  end
+
 
 end
