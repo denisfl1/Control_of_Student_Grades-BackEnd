@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  post "/createStudent" => "create_student#createStudent"
-
+  post "/createStudent" => "student#createStudent"
+  get "/getStudent" => "student#getStudents"
 
 end

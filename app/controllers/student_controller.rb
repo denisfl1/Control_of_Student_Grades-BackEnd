@@ -1,4 +1,4 @@
-class StudentsController < ApplicationController
+class StudentController < ApplicationController
 
 
   def createStudent
@@ -28,9 +28,9 @@ class StudentsController < ApplicationController
 
     }
 
-
+    render json: "Criado com sucesso",status:200
   end
-  render json: "Criado com sucesso",status:200
+
 
 
   def getStudents
