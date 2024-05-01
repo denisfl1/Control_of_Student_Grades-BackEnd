@@ -14,7 +14,18 @@ class StudentController < ApplicationController
       'Lucas Ferreira',
       'Sofia Cardoso',
       'Miguel Gonçalves',
+      'Gabriel Oliveira',
+      'Marina Santos',
+      'Felipe Lima',
+      'Isabela Pereira',
+      'Lucas Costa',
+      'Giovanna Rodrigues',
+      'Matheus Fernandes',
+      'Sofia Almeida',
+      'Enzo Martins',
+      'Laura Silva',
     ]
+
 
     names.each{|data|
 
@@ -22,21 +33,21 @@ class StudentController < ApplicationController
     parts = name.split(' ')
     first = parts.first
     last = parts.last
-    random = rand(* 1000000000)
+    randomNote = rand(7..10)
     subjects = {
-      português:nil,
-      literatura:nil,
-      inglês:nil,
-      matemática:nil,
-      física:nil,
-      química:nil,
-      biologia:nil,
-      geografia:nil,
-      história:nil,
-      sociologia:nil,
-      filosofia:nil,
-      artes:nil,
-      educação_física:nil
+      português:randomNote,
+      literatura:randomNote,
+      inglês:randomNote,
+      matemática:randomNote,
+      física:randomNote,
+      química:randomNote,
+      biologia:randomNote,
+      geografia:randomNote,
+      história:randomNote,
+      sociologia:randomNote,
+      filosofia:randomNote,
+      artes:randomNote,
+      educação_física:randomNote
 
     }
 
@@ -66,7 +77,7 @@ class StudentController < ApplicationController
 
       if student
 
-        student.update(notes: student.notes.merge({ datas[0] => datas[1] }))
+        student.update(notes: student.notes.merge({datas[0] => datas[1] }))
 
       end
 
