@@ -55,10 +55,27 @@ class StudentController < ApplicationController
 
     }
 
+    # Student.create(name:params[:first],surname:params[:last],ra:params[:ra],notes:params[:subjects])
+
+
     render json: "Criado com sucesso",status:200
+
   end
 
+  def editStudent
 
+    search = Student.find_by(id:params[:id])
+    name = params[:name]
+    surname = params[:surname]
+    ra = params[:ra]
+    notes = params[:notes]
+
+    search.update(name:name,surname:surname,notes:search.notes.merge({notes[0]=>notes[1]}),ra:ra)
+
+    render json:"Atualizado com sucesso!",status:200
+
+
+  end
 
   def getStudents
 
@@ -77,7 +94,7 @@ class StudentController < ApplicationController
 
       if student
 
-        student.update(notes: student.notes.merge({datas[0] => datas[1] }))
+        student.update(notes: student.notes.merge({datas[0] => datas[1]}))
 
       end
 
