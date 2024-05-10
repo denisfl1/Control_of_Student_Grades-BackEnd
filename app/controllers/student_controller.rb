@@ -105,41 +105,41 @@ class StudentController < ApplicationController
         end
 
         obj[i] = {
-          português:null,
-          literatura:null,
-          inglês:null,
-          matemática:null,
-          física:null,
-          química:null,
-          biologia:null,
-          geografia:null,
-          história:null,
-          sociologia:null,
-          filosofia:null,
-          artes:null,
-          educação_física:null
+          português:nil,
+          literatura:nil,
+          inglês:nil,
+          matemática:nil,
+          física:nil,
+          química:nil,
+          biologia:nil,
+          geografia:nil,
+          história:nil,
+          sociologia:nil,
+          filosofia:nil,
+          artes:nil,
+          educação_física:nil
           }
 
           obj['Média'] = {
-            português:null,
-            literatura:null,
-            inglês:null,
-            matemática:null,
-            física:null,
-            química:null,
-            biologia:null,
-            geografia:null,
-            história:null,
-            sociologia:null,
-            filosofia:null,
-            artes:null,
-            educação_física:null
+            português:nil,
+            literatura:nil,
+            inglês:nil,
+            matemática:nil,
+            física:nil,
+            química:nil,
+            biologia:nil,
+            geografia:nil,
+            história:nil,
+            sociologia:nil,
+            filosofia:nil,
+            artes:nil,
+            educação_física:nil,
             }
 
 
       end
 
-    Student.create(name:params[:first],surname:params[:last],ra:params[:ra],notes:obj)
+    Student.create(name:params[:name],surname:params[:surname],ra:params[:ra],notes:obj)
 
     render json: "Criado com sucesso",status:200
 
