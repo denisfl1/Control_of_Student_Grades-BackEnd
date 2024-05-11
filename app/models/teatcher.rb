@@ -1,0 +1,2 @@
+class Teatcher < ApplicationRecord
+end

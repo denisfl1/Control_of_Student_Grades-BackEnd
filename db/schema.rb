@@ -10,12 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_30_194719) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_11_001818) do
   create_table "students", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "surname"
     t.json "notes"
     t.string "ra"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "teatchers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "teatcherName"
+    t.string "credential"
+    t.string "discipline"
+    t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
