@@ -185,17 +185,27 @@ class StudentController < ApplicationController
 
   def addNote
 
-    student = Student.find_by(ra:params[:ra])
-    datas = params[:data]
+    student = Student.find_by(ra:'1234525366')
+    notes = params[:notes]
 
 
       if student
 
-        student.update(notes: student.notes.merge({datas[0] => datas[1]}))
+        notes_key = student.notes
+
+        notes_key[notes[0]][datas[1]] = datas[2]
+
+        student.update(notes:notes_key)
+
+        render json: student,status:200
+
+
+      else
+
+        render json: "Estudante não encontrado",status:404
 
       end
 
-      render json:"Atualizado com sucesso",status:200
 
   end
 
