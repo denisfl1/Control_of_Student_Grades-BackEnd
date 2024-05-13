@@ -20,11 +20,11 @@ class ApplicationController < ActionController::Base
           token
 
           begin
-            JWT.deconde(token,"secret",true,algorithm:'HS256')
+            JWT.decode(token,"secret",true,algorithm:'HS256')
 
-          rescue
+          rescue JWT::DecodeError
 
-            JWT::DecodeError
+            nil
 
           end
 

@@ -14,7 +14,7 @@ class TeatcherController < ApplicationController
 
       else
 
-        render json:"Dados inválidos", status:404
+        render json:"Dados Inválidos", status:404
 
       end
 
@@ -40,7 +40,7 @@ class TeatcherController < ApplicationController
 
         else
 
-          render json:"Credenciais ou Senha inváidos",status:404
+          render json:"Credenciais ou Senha inválidos",status:404
 
 
         end
@@ -52,29 +52,27 @@ class TeatcherController < ApplicationController
 
       def AddNote
 
-        search = Teatcher.find_by(credental:authorized_user.credential)
+        teatcher = Teatcher.find_by(credential:authorized_user.credential)
         student = Student.find_by(ra:params[:ra])
 
-        if(search && student)
-          note = params[:note]
-          two_months = params[:two_months]
-          discipline = search.discipline
-
-          notes_key = student.notes
-
-          notes_key[two_months][discipline] = note
-
-          student.update(notes:notes_key)
-
-          render json: "Adicionado com Sucesso!",status:200
+          return render json: "Estudante não encontrado!",status:404 unless(student)
+          return render json: "Professor não encontrado!",status:404 unless(teatcher)
 
 
-        else
+            if(teatcher && student)
+              note = params[:note]
+              two_months = params[:two_months]
+              discipline = teatcher.discipline
 
-          render json: "Estudante ou Professor não encontrado!",status:404
+              notes_key = student.notes
 
+              notes_key[two_months][discipline] = note
 
-        end
+              student.update(notes:notes_key)
+
+              render json: "Adicionado com Sucesso!",status:200
+
+            end
 
 
       end

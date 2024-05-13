@@ -183,31 +183,5 @@ class StudentController < ApplicationController
   end
 
 
-  def addNote
-
-    student = Student.find_by(ra:'1234525366')
-    notes = params[:notes]
-
-
-      if student
-
-        notes_key = student.notes
-
-        notes_key[notes[0]][datas[1]] = datas[2]
-
-        student.update(notes:notes_key)
-
-        render json: student,status:200
-
-
-      else
-
-        render json: "Estudante não encontrado",status:404
-
-      end
-
-
-  end
-
 
 end
