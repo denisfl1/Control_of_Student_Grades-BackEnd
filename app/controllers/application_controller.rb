@@ -17,7 +17,6 @@ class ApplicationController < ActionController::Base
         if(auth_header)
 
           token = auth_header.split(' ').last
-          token
 
           begin
             JWT.decode(token,"secret",true,algorithm:'HS256')

@@ -40,7 +40,7 @@ class TeatcherController < ApplicationController
 
         else
 
-          render json:"Credenciais ou Senha inválidos",status:404
+          render json:"Credenciais ou senha inválidos",status:404
 
 
         end
@@ -63,6 +63,21 @@ class TeatcherController < ApplicationController
               note = params[:note]
               two_months = params[:two_months]
               discipline = teatcher.discipline
+              type  = note.class == Integer
+
+             return render json:"O valor declarado não é um número!",status:403 unless(note == nil || type)
+
+              if(two_months == "Média")
+
+                return render json:"Você não pode alterar a média!",status:403
+
+              end
+
+              if(type && note > 10)
+
+                return render json:"Valor inválido",status:403
+
+              end
 
               notes_key = student.notes
 
@@ -70,7 +85,7 @@ class TeatcherController < ApplicationController
 
               student.update(notes:notes_key)
 
-              render json: "Adicionado com Sucesso!",status:200
+              render json: "Adicionado com sucesso!",status:200
 
             end
 

@@ -57,20 +57,20 @@ class StudentController < ApplicationController
     #       educação_física:randomNote
     #       }
 
-    #       obj['Média'] = {
-    #         português:0,
-    #         literatura:0,
-    #         inglês:0,
-    #         matemática:0,
-    #         física:0,
-    #         química:0,
-    #         biologia:0,
-    #         geografia:0,
-    #         história:0,
-    #         sociologia:0,
-    #         filosofia:0,
-    #         artes:0,
-    #         educação_física:0
+    #         obj['Média'] = {
+    #         português:nil,
+    #         literatura:nil,
+    #         inglês:nil,
+    #         matemática:nil,
+    #         física:nil,
+    #         química:nil,
+    #         biologia:nil,
+    #         geografia:nil,
+    #         história:nil,
+    #         sociologia:nil,
+    #         filosofia:nil,
+    #         artes:nil,
+    #         educação_física:nil,
     #         }
 
 
