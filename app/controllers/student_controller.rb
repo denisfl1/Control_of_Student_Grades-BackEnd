@@ -92,7 +92,6 @@ class StudentController < ApplicationController
        obj = {}
 
       for i in 1..5
-        randomNote = rand(7..10)
 
         if(i == 5)
 
@@ -171,11 +170,16 @@ class StudentController < ApplicationController
 
   def getStudent
 
-    student = Student.find_by(ra:params[:id])
+    student = Student.find_by(ra:params[:ra])
 
     if student
 
       render json: student, status:200
+
+
+    else
+
+      render json:"Estudante não encontrado",status: 404
 
     end
 
