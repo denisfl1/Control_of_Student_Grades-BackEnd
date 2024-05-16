@@ -1,4 +1,5 @@
 class TeatcherController < ApplicationController
+  before_action :authorize, only:[:AddNote]
 
   def teatcherCreate
 
@@ -60,10 +61,10 @@ class TeatcherController < ApplicationController
 
 
             if(teatcher && student)
-              note = params[:note]
+              note = params[:convert]
               two_months = params[:two_months]
               discipline = teatcher.discipline
-              type  = note.class == Integer
+              type  = note.class == Integer || note.class == Float
 
              return render json:"O valor declarado não é um número!",status:403 unless(note == nil || type)
 

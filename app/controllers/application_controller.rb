@@ -13,7 +13,6 @@ class ApplicationController < ActionController::Base
 
     auth_header = request.headers["Authorization"]
 
-
         if(auth_header)
 
           token = auth_header.split(' ').last
@@ -34,16 +33,22 @@ class ApplicationController < ActionController::Base
 
       def authorized_user
 
-        decode_Token = decode_Token()
+        decoded_Token = decode_Token()
 
-
-        if(decode_Token)
+        if(decoded_Token)
 
           teatcher = decode_Token[0]["credential"]
 
           searchTeatcher = Teatcher.find_by(credential:teatcher)
 
         end
+
+      end
+
+
+      def authorize
+
+       return render json:"Você não está autenticado",status:401 unless authorized_user
 
       end
 

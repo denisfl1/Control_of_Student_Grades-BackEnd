@@ -1,5 +1,5 @@
 class StudentController < ApplicationController
-
+  before_action :authorize, only:[:getStudents]
 
   def createStudent
 
@@ -185,6 +185,27 @@ class StudentController < ApplicationController
 
 
   end
+
+
+    def getStudent_to_Add_Note
+
+      student = Student.find_by(ra:params[:ra])
+      subjects = authorized_user.discipline
+
+      if (student && subjects)
+
+        render json: {alumn:student,discipline:subjects}, status:200
+
+
+      else
+
+        render json:"Estudante não encontrado",status: 404
+
+      end
+
+
+
+    end
 
 
 
