@@ -162,8 +162,9 @@ class StudentController < ApplicationController
   def getStudents
 
     students = Student.all
+    subjects = authorized_user.discipline
 
-    render json: students, status:200
+    render json: students , status:200
 
   end
 
@@ -189,7 +190,7 @@ class StudentController < ApplicationController
 
     def getStudent_to_Add_Note
 
-      student = Student.find_by(ra:params[:ra])
+      student = Student.all
       subjects = authorized_user.discipline
 
       if (student && subjects)
