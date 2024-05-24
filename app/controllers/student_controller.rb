@@ -162,7 +162,6 @@ class StudentController < ApplicationController
   def getStudents
 
     students = Student.all
-    subjects = authorized_user.discipline
 
     render json: students , status:200
 
