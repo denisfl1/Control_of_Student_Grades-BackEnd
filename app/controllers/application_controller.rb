@@ -46,9 +46,32 @@ class ApplicationController < ActionController::Base
       end
 
 
+      def authorized_student
+
+        decoded_Token = decode_Token()
+
+        if(decoded_Token)
+
+          student = decode_Token[0]["ra"]
+
+          searchStudent = Student.find_by(ra:student)
+
+        end
+
+
+      end
+
+
       def authorize
 
        return render json:"Você não está autenticado",status:401 unless authorized_user
+
+      end
+
+
+      def authorize_student
+
+        return render json:"Você não está autenticado",status:401 unless authorized_student
 
       end
 
