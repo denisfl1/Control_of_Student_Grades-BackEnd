@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   # post "/addnote" => "student#addNote"
   post "/addnote" => "teatcher#AddNote"
   post "/createTeatcher" => "teatcher#teatcherCreate"
-  post "/loginTeatcher" => "teatcher#loginTeatcher"
+  post "/login" => "teatcher#login"
 
 end

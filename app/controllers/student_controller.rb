@@ -1,5 +1,5 @@
 class StudentController < ApplicationController
-  before_action :authorize, only:[:getStudents]
+  # before_action :authorize_student, only:[:getStudents]
 
   def createStudent
 
@@ -138,7 +138,8 @@ class StudentController < ApplicationController
 
       end
 
-    Student.create(name:params[:name],surname:params[:surname],ra:params[:ra],notes:obj)
+
+    Student.create(name:params[:name],surname:params[:surname],ra:params[:ra],password:params[:password],notes:obj)
 
     render json: "Criado com sucesso",status:200
 
@@ -170,19 +171,28 @@ class StudentController < ApplicationController
 
   def getStudent
 
+    searchStudent = authorized_student
+    searchTeatcher = Teatcher.find_by(credential:authorized_user[:credential])
     student = Student.find_by(ra:params[:ra])
-
-    if student
-
-      render json: student, status:200
+    if(searchTeatcher || searchStudent == params[:ra])
 
 
-    else
+          if student
 
-      render json:"Estudante não encontrado",status: 404
+            render json: student, status:200
 
-    end
 
+          else
+
+            render json:"Estudante não encontrado",status: 404
+
+          end
+
+        else
+
+          render json:"Não Autorizado!",status: 403
+
+      end
 
   end
 

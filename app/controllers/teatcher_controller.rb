@@ -25,9 +25,10 @@ class TeatcherController < ApplicationController
   end
 
 
-      def loginTeatcher
+      def login
 
         @teatcher = Teatcher.find_by(credential:params[:credential])
+        @student = Student.find_by(ra:params[:credential])
 
 
         if(@teatcher && @teatcher.authenticate(teatcherParams[:password]))
@@ -38,6 +39,14 @@ class TeatcherController < ApplicationController
 
           render json:{teatcher:@teatcher,token:token},status:200
 
+        elsif(@student && @student.authenticate(params[:password]))
+
+          fullname = "#{@student.name} #{@student.surname}"
+
+          token = encode_Token({id:@student.id,name:fullname,
+          ra:@student.ra})
+
+          render json:{student:@student,token:token},status:200
 
         else
 
