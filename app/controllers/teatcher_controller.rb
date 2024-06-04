@@ -85,7 +85,7 @@ class TeatcherController < ApplicationController
 
               if(type && note > 10)
 
-                return render json:"Valor inválido",status:403
+                return render json:"#{note} é um valor inválido!",status:403
 
               end
 

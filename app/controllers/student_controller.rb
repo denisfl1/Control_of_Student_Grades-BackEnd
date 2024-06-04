@@ -1,93 +1,103 @@
 class StudentController < ApplicationController
-  # before_action :authorize_student, only:[:getStudents]
+  before_action :authorize, only:[:getStudent_to_Add_Note]
+
+
+  def GenerateStudents
+
+      names = [
+      'Aurora Silva',
+      'Dante Rodrigues',
+      'Valentina Oliveira',
+      'Mateus Santos',
+      'Isabela Pereira',
+      'Gabriel Costa',
+      'Helena Almeida',
+      'Lucas Ferreira',
+      'Sofia Cardoso',
+      'Miguel Gonçalves',
+      'Gabriel Oliveira',
+      'Marina Santos',
+      'Felipe Lima',
+      'Isabela Pereira',
+      'Lucas Costa',
+      'Giovanna Rodrigues',
+      'Matheus Fernandes',
+      'Sofia Almeida',
+      'Enzo Martins',
+      'Laura Silva',
+    ]
+
+      obj = {}
+
+      for i in 1..5
+        randomNote = rand(7..10)
+
+        if(i == 5)
+
+          i = 'Média'
+
+        end
+
+        if(!obj[i])
+          obj[i] = []
+        end
+
+        obj[i] = {
+          português:randomNote,
+          literatura:randomNote,
+          inglês:randomNote,
+          matemática:randomNote,
+          física:randomNote,
+          química:randomNote,
+          biologia:randomNote,
+          geografia:randomNote,
+          história:randomNote,
+          sociologia:randomNote,
+          filosofia:randomNote,
+          artes:randomNote,
+          educação_física:randomNote
+          }
+
+            obj['Média'] = {
+            português:nil,
+            literatura:nil,
+            inglês:nil,
+            matemática:nil,
+            física:nil,
+            química:nil,
+            biologia:nil,
+            geografia:nil,
+            história:nil,
+            sociologia:nil,
+            filosofia:nil,
+            artes:nil,
+            educação_física:nil,
+            }
+
+
+      end
+
+
+    names.each{|data|
+
+    name = data
+    parts = name.split(' ')
+    first = parts.first
+    last = parts.last
+    random = rand(100000000000)
+
+    Student.create(name:first,surname:last,ra:random,password:"123456",notes:obj)
+
+    }
+
+
+
+  end
+
+
 
   def createStudent
 
-    # names = [
-    #   'Aurora Silva',
-    #   'Dante Rodrigues',
-    #   'Valentina Oliveira',
-    #   'Mateus Santos',
-    #   'Isabela Pereira',
-    #   'Gabriel Costa',
-    #   'Helena Almeida',
-    #   'Lucas Ferreira',
-    #   'Sofia Cardoso',
-    #   'Miguel Gonçalves',
-    #   'Gabriel Oliveira',
-    #   'Marina Santos',
-    #   'Felipe Lima',
-    #   'Isabela Pereira',
-    #   'Lucas Costa',
-    #   'Giovanna Rodrigues',
-    #   'Matheus Fernandes',
-    #   'Sofia Almeida',
-    #   'Enzo Martins',
-    #   'Laura Silva',
-    # ]
-
-    #   obj = {}
-
-    #   for i in 1..5
-    #     randomNote = rand(7..10)
-
-    #     if(i == 5)
-
-    #       i = 'Média'
-
-    #     end
-
-    #     if(!obj[i])
-    #       obj[i] = []
-    #     end
-
-    #     obj[i] = {
-    #       português:randomNote,
-    #       literatura:randomNote,
-    #       inglês:randomNote,
-    #       matemática:randomNote,
-    #       física:randomNote,
-    #       química:randomNote,
-    #       biologia:randomNote,
-    #       geografia:randomNote,
-    #       história:randomNote,
-    #       sociologia:randomNote,
-    #       filosofia:randomNote,
-    #       artes:randomNote,
-    #       educação_física:randomNote
-    #       }
-
-    #         obj['Média'] = {
-    #         português:nil,
-    #         literatura:nil,
-    #         inglês:nil,
-    #         matemática:nil,
-    #         física:nil,
-    #         química:nil,
-    #         biologia:nil,
-    #         geografia:nil,
-    #         história:nil,
-    #         sociologia:nil,
-    #         filosofia:nil,
-    #         artes:nil,
-    #         educação_física:nil,
-    #         }
-
-
-    #   end
-
-
-    # names.each{|data|
-
-    # name = data
-    # parts = name.split(' ')
-    # first = parts.first
-    # last = parts.last
-    # random = rand(100000000000)
-
-    # Student.create(name:first,surname:last,ra:random,notes:obj)
-
-    # }
 
        obj = {}
 
@@ -171,10 +181,10 @@ class StudentController < ApplicationController
 
   def getStudent
 
-    searchStudent = authorized_student
-    searchTeatcher = Teatcher.find_by(credential:authorized_user[:credential])
+    searchStudent = authorized_student && Student.find_by(ra:authorized_student[:ra])
+    searchTeatcher = authorized_user && Teatcher.find_by(id:authorized_user)
     student = Student.find_by(ra:params[:ra])
-    if(searchTeatcher || searchStudent == params[:ra])
+    if(searchTeatcher || searchStudent[:ra] === params[:ra])
 
 
           if student
@@ -190,7 +200,7 @@ class StudentController < ApplicationController
 
         else
 
-          render json:"Não Autorizado!",status: 403
+          render json:"Acesso restrito!",status: 403
 
       end
 

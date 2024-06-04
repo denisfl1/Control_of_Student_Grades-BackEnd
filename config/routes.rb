@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
-  post "/createStudent" => "student#createStudent"
   get "/getStudents" => "student#getStudents"
   get "/getStudent/:ra" => "student#getStudent"
   get "/getStudentToNote" => "student#getStudent_to_Add_Note"
-  # post "/addnote" => "student#addNote"
+  post "/createStudent" => "student#createStudent"
+  post "/generateStudents" => "student#GenerateStudents"
   post "/addnote" => "teatcher#AddNote"
   post "/createTeatcher" => "teatcher#teatcherCreate"
   post "/login" => "teatcher#login"
